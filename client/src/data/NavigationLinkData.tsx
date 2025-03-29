@@ -3,7 +3,7 @@ import {
   Dashboard,
   ZoomMoney,
   ChartBar,
-  Settings,
+  News,
   Cash,
 } from "tabler-icons-react";
 
@@ -17,7 +17,7 @@ export function NavigationLinkData() {
     { link: `/expense/${username}`, label: "Expense", icon: ZoomMoney },
     { link: `/portfolio/${username}`, label: "Portfolio", icon: ChartBar },
     { link: `/budget/${username}`, label: "Budget", icon: Cash },
-    { link: `/settings/${username}`, label: "Settings", icon: Settings },
+    { link: `/News/${username}`, label: "News", icon: News },
   ];
 
   return {

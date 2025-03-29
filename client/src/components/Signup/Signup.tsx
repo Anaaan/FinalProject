@@ -11,65 +11,27 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
 
-import { setIsLoggedIn, setSingleUser } from "../../Redux/userSlice";
 import SERVER_URL from "../../utils/url";
-
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const theme = createTheme();
 
-export default function Login() {
+export default function Signup() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    await Axios.post(
-      `${SERVER_URL}/users`,
-      {
-        username: data.get("username"),
-        email: data.get("email"),
-        password: data.get("password"),
-      }
-    ).then((res) => {
-      Axios.post(
-        `${SERVER_URL}/auth/login`,
-        {
-          email: res.data.email,
-          password: data.get("password"),
-        }
-      )
-        .then((res) => {
-          if (res.data.loginToken) {
-            localStorage.setItem("currentToken", res.data.loginToken);
-            localStorage.setItem("userId", res.data.user._id);
-            dispatch(setSingleUser(res.data.user));
-            dispatch(setIsLoggedIn());
-            navigate(`/dashboard/${res.data.user.username}`);
-          }
-        })
-        .catch((error) => console.log(error.response.data.message));
-    });
+    await Axios.post(`${SERVER_URL}/users`, {
+      username: data.get("username"),
+      email: data.get("email"),
+      password: data.get("password"),
+    })
+      .then(() => {
+        navigate("/login"); // Redirect to Login after successful signup
+      })
+      .catch((error) => console.log(error.response.data.message));
   };
 
   return (
@@ -86,9 +48,7 @@ export default function Login() {
               "url(https://images.unsplash.com/photo-1612010167108-3e6b327405f0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
-              t.palette.mode === "light"
-                ? t.palette.grey[50]
-                : t.palette.grey[900],
+              t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900],
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -107,14 +67,9 @@ export default function Login() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign up
+              Sign Up
             </Typography>
-            <Box
-              component="form"
-              noValidate
-              onSubmit={handleSubmit}
-              sx={{ mt: 1 }}
-            >
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -133,7 +88,6 @@ export default function Login() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                autoFocus
               />
               <TextField
                 margin="normal"
@@ -145,12 +99,7 @@ export default function Login() {
                 id="password"
                 autoComplete="current-password"
               />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
+              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
                 Sign Up
               </Button>
               <Grid item>
@@ -158,7 +107,6 @@ export default function Login() {
                   {"Already have an account? Login"}
                 </Link>
               </Grid>
-              <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
         </Grid>

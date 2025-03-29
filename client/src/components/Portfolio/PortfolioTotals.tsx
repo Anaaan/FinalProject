@@ -1,5 +1,5 @@
 import { RingProgress, Text, Paper, Center, Group, Title } from "@mantine/core";
-import { CurrencyEuro } from "tabler-icons-react";
+import { CurrencyRupee } from "tabler-icons-react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
 
@@ -30,7 +30,7 @@ function PortfolioTotals() {
         </Title>
         <Title order={3} ml={50}>
           Total:{" "}
-          <CurrencyEuro size={22} strokeWidth={2.2} className="currency-icon" />
+          <CurrencyRupee size={22} strokeWidth={2.2} className="currency-icon" />
           {stat.value}
         </Title>
         <Center>
@@ -53,7 +53,7 @@ function PortfolioTotals() {
         <Group>
           <Text ml={30}>
             Goal:{" "}
-            <CurrencyEuro
+            <CurrencyRupee
               size={18}
               strokeWidth={1.5}
               className="currency-icon"
@@ -62,7 +62,7 @@ function PortfolioTotals() {
           </Text>
           <Text>
             Difference:{" "}
-            <CurrencyEuro
+            <CurrencyRupee
               size={18}
               strokeWidth={1.5}
               className="currency-icon"

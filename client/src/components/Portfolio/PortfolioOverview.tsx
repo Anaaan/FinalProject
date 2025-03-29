@@ -8,7 +8,7 @@ import {
   Title,
 } from "@mantine/core";
 import { useSelector } from "react-redux";
-import { CurrencyEuro } from "tabler-icons-react";
+import { CurrencyRupee } from "tabler-icons-react";
 
 import PortfolioFunctions from "../../stats/portfolio";
 import { RootState } from "../../Redux/store";
@@ -115,7 +115,7 @@ export function PortfolioOverview() {
           </Text>
         </Group>
         <Title order={3} mt="xs">
-          <CurrencyEuro
+          <CurrencyRupee
             size={22}
             strokeWidth={2.3}
             className="currency-icon-overview"

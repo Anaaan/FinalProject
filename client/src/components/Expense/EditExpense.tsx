@@ -1,7 +1,7 @@
-import { Button, Group, TextInput } from "@mantine/core";
+import { Button, Group, Select, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { DatePicker } from "@mantine/dates";
-import { CurrencyEuro } from "tabler-icons-react";
+import { CurrencyRupee } from "tabler-icons-react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 
@@ -68,7 +68,7 @@ const EditExpense = (rowDetails: ExpenseData) => {
         />
         <TextInput
           required
-          icon={<CurrencyEuro size={16} />}
+          icon={<CurrencyRupee size={16} />}
           label="Amount"
           placeholder={rowDetails.amount}
           {...form.getInputProps("amount")}
@@ -79,10 +79,11 @@ const EditExpense = (rowDetails: ExpenseData) => {
           placeholder={rowDetails.date && rowDetails.date.substring(0, 10)}
           {...form.getInputProps("date")}
         />
-        <TextInput
+        <Select
           required
           label="Category"
           placeholder={rowDetails.tag}
+          data={["Food", "Transport", "Shopping", "Entertainment", "Bills", "Other"]}
           {...form.getInputProps("tag")}
         />
         <TextInput

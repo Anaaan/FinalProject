@@ -8,7 +8,7 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { DatePicker } from "@mantine/dates";
-import { CurrencyEuro } from "tabler-icons-react";
+import { CurrencyRupee } from "tabler-icons-react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 
@@ -74,7 +74,7 @@ function AddIncome() {
         <NumberInput
           placeholder="Amount"
           label="Add income amount"
-          icon={<CurrencyEuro size={16} />}
+          icon={<CurrencyRupee size={16} />}
           required
           {...form.getInputProps("amount")}
         />

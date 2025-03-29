@@ -8,7 +8,7 @@ import {
   SimpleGrid,
   Modal,
 } from "@mantine/core";
-import { CurrencyEuro, Edit } from "tabler-icons-react";
+import { CurrencyRupee, Edit } from "tabler-icons-react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -51,7 +51,7 @@ export function BudgetOverview() {
         </Title>
         <Text color="indigo" align="center" size="sm">
           Budget: {budgetAmount}
-          <CurrencyEuro size={16} strokeWidth={1.5} className="currency-icon" />{" "}
+          <CurrencyRupee size={16} strokeWidth={1.5} className="currency-icon" />{" "}
         </Text>
         <Group position="apart" mt="xs">
           <Text size="sm" color="dimmed">
@@ -62,11 +62,11 @@ export function BudgetOverview() {
         <Group position="apart" mt={20} mb={20}>
           <Text size="sm" color="dimmed">
             Spent: {spentAmount} of {budgetAmount}
-            <CurrencyEuro size={16} strokeWidth={1.5} className="currency-icon" />
+            <CurrencyRupee size={16} strokeWidth={1.5} className="currency-icon" />
           </Text>
           <Text size="sm" color="dimmed">
             Left: {budgetAmount - spentAmount}
-            <CurrencyEuro size={16} strokeWidth={1.5} className="currency-icon" />
+            <CurrencyRupee size={16} strokeWidth={1.5} className="currency-icon" />
           </Text>
           {stat.tag ? <Badge size="md"> {stat.tag} </Badge> : null}
         </Group>

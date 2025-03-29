@@ -37,12 +37,7 @@ export const createUser = async (
     await UserService.createUser(user)
     res.json(user)
   } catch (error) {
-    console.log(error)
-    if (error instanceof Error && error.name == 'ValidationError') {
-      next(new BadRequestError('Invalid Request', error))
-    } else {
-      next(error)
-    }
+    next(error)
   }
 }
 
@@ -54,24 +49,23 @@ export const loginUser = async (
   try {
     const { email, password } = req.body
     const user = await UserService.findUserByEmail(email)
-    if (user) {
-      const isCorrectPassword = await bcrypt.compare(password, user.password)
-      console.log(password, user.password)
-      if (!isCorrectPassword) {
-        return next(new BadRequestError('Incorrect password'))
-      }
-
-      const loginToken = jwt.sign(
-        { userId: user._id, email: user.email },
-        JWT_SECRET,
-        { expiresIn: '24h' }
-      )
-      res.json({ loginToken, user })
-    } else {
-      next(new NotFoundError('E-Mail address does not exist'))
+    if (!user) {
+      return next(new NotFoundError('E-Mail address does not exist'))
     }
+
+    const isCorrectPassword = await bcrypt.compare(password, user.password)
+    if (!isCorrectPassword) {
+      return next(new BadRequestError('Incorrect password'))
+    }
+
+    const loginToken = jwt.sign(
+      { userId: user._id, email: user.email, isAdmin: user.isAdmin },
+      JWT_SECRET,
+      { expiresIn: '24h' }
+    )
+    res.json({ loginToken, user })
   } catch (error) {
-    next(new BadRequestError('Internal server error, sorry dude'))
+    next(error)
   }
 }
 
@@ -84,16 +78,11 @@ export const findUsers = async (
   try {
     res.json(await UserService.findUsers())
   } catch (error) {
-    if (error instanceof Error && error.name == 'ValidationError') {
-      next(new BadRequestError('Invalid Request', error))
-    } else {
-      next(error)
-    }
+    next(error)
   }
 }
 
 //GET specific user /user/:id
-
 export const findUserById = async (
   req: Request,
   res: Response,
@@ -102,16 +91,11 @@ export const findUserById = async (
   try {
     res.json(await UserService.findUserById(req.params.userId))
   } catch (error) {
-    if (error instanceof Error && error.name == 'ValidationError') {
-      next(new BadRequestError('Invalid Request', error))
-    } else {
-      next(error)
-    }
+    next(error)
   }
 }
 
 //GET specific user by Username
-
 export const findUserByUserName = async (
   req: Request,
   res: Response,
@@ -120,38 +104,25 @@ export const findUserByUserName = async (
   try {
     res.json(await UserService.findUserByUsername(req.params.username))
   } catch (error) {
-    if (error instanceof Error && error.name == 'ValidationError') {
-      next(new BadRequestError('Invalid Request', error))
-    } else {
-      next(error)
-    }
+    next(error)
   }
 }
 
 //PUT update specific user /users/:id
-
 export const updateUser = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const userId = req.params.userId
-    const dataToUpdate = req.body
-    const updatedUser = await UserService.updateUser(userId, dataToUpdate)
+    const updatedUser = await UserService.updateUser(req.params.userId, req.body)
     res.json(updatedUser)
-    console.log(updatedUser)
   } catch (error) {
-    if (error instanceof Error && error.name == 'ValidationError') {
-      next(new BadRequestError('Invalid Request', error))
-    } else {
-      next(error)
-    }
+    next(error)
   }
 }
 
 //DELETE user
-
 export const deleteUser = async (
   req: Request,
   res: Response,
@@ -160,118 +131,91 @@ export const deleteUser = async (
   try {
     res.json(await UserService.deleteUser(req.params.userId))
   } catch (error) {
-    if (error instanceof Error && error.name == 'ValidationError') {
-      next(new BadRequestError('Invalid Request', error))
-    } else {
-      next(error)
-    }
+    next(error)
   }
 }
 
 // PATCH ADD Investment to User
-
 export const addInvestmentToUser = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const userId = req.params.userId
-    const investmentId = req.params.investmentId
     const updatedUser = await UserService.addInvestmentToUser(
-      userId,
-      investmentId
+      req.params.userId,
+      req.params.investmentId
     )
     res.json(updatedUser)
   } catch (error) {
-    if (error instanceof Error && error.name == 'ValidationError') {
-      next(new BadRequestError('Invalid Request', error))
-    } else {
-      next(error)
-    }
+    next(error)
   }
 }
 
 // PATCH ADD Income to User
-
 export const addIncomeToUser = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const userId = req.params.userId
-    const incomeId = req.params.incomeId
-    const updatedUser = await UserService.addIncomeToUser(userId, incomeId)
+    const updatedUser = await UserService.addIncomeToUser(
+      req.params.userId,
+      req.params.incomeId
+    )
     res.json(updatedUser)
   } catch (error) {
-    if (error instanceof Error && error.name == 'ValidationError') {
-      next(new BadRequestError('Invalid Request', error))
-    } else {
-      next(error)
-    }
+    next(error)
   }
 }
 
 // PATCH ADD Expense to User
-
 export const addExpenseToUser = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const userId = req.params.userId
-    const expenseId = req.params.expenseId
-    const updatedUser = await UserService.addExpenseToUser(userId, expenseId)
+    const updatedUser = await UserService.addExpenseToUser(
+      req.params.userId,
+      req.params.expenseId
+    )
     res.json(updatedUser)
   } catch (error) {
-    if (error instanceof Error && error.name == 'ValidationError') {
-      next(new BadRequestError('Invalid Request', error))
-    } else {
-      next(error)
-    }
+    next(error)
   }
 }
 
 // PATCH ADD Budget to User
-
 export const addBudgetToUser = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const userId = req.params.userId
-    const budgetId = req.params.expenseId
-    const updatedUser = await UserService.addExpenseToUser(userId, budgetId)
+    const updatedUser = await UserService.addBudgetToUser(
+      req.params.userId,
+      req.params.budgetId
+    )
     res.json(updatedUser)
   } catch (error) {
-    if (error instanceof Error && error.name == 'ValidationError') {
-      next(new BadRequestError('Invalid Request', error))
-    } else {
-      next(error)
-    }
+    next(error)
   }
 }
 
 // PATCH ADD Image to User
-
 export const addImageToUser = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const userId = req.params.userId
-    const imageId = req.params.imageId
-    const updatedUser = await UserService.addImageToUser(userId, imageId)
+    const updatedUser = await UserService.addImageToUser(
+      req.params.userId,
+      req.params.imageId
+    )
     res.json(updatedUser)
   } catch (error) {
-    if (error instanceof Error && error.name == 'ValidationError') {
-      next(new BadRequestError('Invalid Request', error))
-    } else {
-      next(error)
-    }
+    next(error)
   }
 }

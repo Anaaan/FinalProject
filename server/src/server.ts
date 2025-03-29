@@ -5,14 +5,14 @@ import app from './app'
 // Load environment variables (only if needed for other configs)
 dotenv.config()
 
-const mongoUri = 'mongodb+srv://ddb:anan17@dd.pbbhn.mongodb.net/?retryWrites=true&w=majority&appName=dd'
+const MONGODB_URI="mongodb+srv://abdullaanan017:anan17@cluster0.agkyl.mongodb.net/"
 
 const mongooseOpts: ConnectOptions = {
   autoIndex: true, // Optional: to enable automatic index creation
 }
 
 mongoose
-  .connect(mongoUri, mongooseOpts)
+  .connect(MONGODB_URI, mongooseOpts)
   .then(() => {
     console.log('Connected To Database')
     app.listen(process.env.PORT || 5000, () => {

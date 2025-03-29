@@ -7,7 +7,7 @@ import {
   Title,
 } from "@mantine/core";
 
-import { ArrowUpRight, ArrowDownRight, CurrencyEuro } from "tabler-icons-react";
+import { ArrowUpRight, ArrowDownRight, CurrencyRupee } from "tabler-icons-react";
 import ExpensesFunctions from "../../stats/expenses";
 
 export function ExpenseOverview() {
@@ -51,7 +51,7 @@ export function ExpenseOverview() {
               {stat.title}
             </Text>
             <Title order={3} mt="xs">
-              <CurrencyEuro
+              <CurrencyRupee
                 size={22}
                 strokeWidth={2.3}
                 className="currency-icon-overview"

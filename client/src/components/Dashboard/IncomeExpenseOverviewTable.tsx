@@ -1,5 +1,5 @@
 import { Table, Text, Container } from "@mantine/core";
-import { CurrencyEuro } from "tabler-icons-react";
+import { CurrencyRupee } from "tabler-icons-react";
 import { useSelector } from "react-redux";
 
 import { RootState } from "../../Redux/store";
@@ -19,7 +19,7 @@ export function IncomeExpenseOverviewTable() {
     <tr key={row._id}>
       <td>{row.name}</td>
       <td>
-        <CurrencyEuro size={18} strokeWidth={1.5} className="currency-icon" />
+        <CurrencyRupee size={18} strokeWidth={1.5} className="currency-icon" />
         {row.amount}
       </td>
       <td>{row.tag}</td>

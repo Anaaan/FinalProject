@@ -1,5 +1,5 @@
 import { Group, Paper, Text, SimpleGrid, Title } from "@mantine/core";
-import { ChartLine, CurrencyEuro, ZoomMoney } from "tabler-icons-react";
+import { ChartLine, CurrencyRupee, ZoomMoney } from "tabler-icons-react";
 
 import ExpensesFunctions from "../../stats/expenses";
 import PortfolioFunctions from "../../stats/portfolio";
@@ -50,7 +50,7 @@ export function StatsOverview() {
         <Group spacing="md" mt={15}>
           <Title order={2}>
             {" "}
-            <CurrencyEuro
+            <CurrencyRupee
               size={18}
               strokeWidth={1.5}
               className="currency-icon"

@@ -8,7 +8,7 @@ import Home from "./components/Home/Home";
 import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
 import ProtectedRoute from "./components/ProtectedRoutes/ProtectedRoute";
-import Settings from "./components/Setting/Settings";
+import News from "./components/Setting/News";
 import Portfolio from "./components/Portfolio/Portfolio";
 import Budget from "./components/Budget/Budget";
 
@@ -29,18 +29,18 @@ function App() {
             }
           />
           <Route
-            path="/expense/:username"
-            element={
-              <ProtectedRoute>
-                <Expense />
-              </ProtectedRoute>
-            }
-          />
-          <Route
             path="/portfolio/:username"
             element={
               <ProtectedRoute>
                 <Portfolio />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/expense/:username"
+            element={
+              <ProtectedRoute>
+                <Expense />
               </ProtectedRoute>
             }
           />
@@ -53,10 +53,10 @@ function App() {
             }
           />
           <Route
-            path="/settings/:username"
+            path="/News/:username"
             element={
               <ProtectedRoute>
-                <Settings />
+                <News />
               </ProtectedRoute>
             }
           />

@@ -7,7 +7,7 @@ import {
   Title,
   Container,
 } from "@mantine/core";
-import { Edit, CurrencyEuro } from "tabler-icons-react";
+import { Edit, CurrencyRupee } from "tabler-icons-react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -44,7 +44,7 @@ export function ExpenseOverviewTable() {
     <tr key={row._id}>
       <td>{row.name}</td>
       <td>
-        <CurrencyEuro size={18} strokeWidth={1.5} className="currency-icon" />
+        <CurrencyRupee size={18} strokeWidth={1.5} className="currency-icon" />
         {row.amount}
       </td>
       <td>{row.tag}</td>

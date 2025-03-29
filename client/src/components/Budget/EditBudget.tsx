@@ -1,6 +1,6 @@
-import { Button, Checkbox, Group, NumberInput, TextInput } from "@mantine/core";
+import { Button, Checkbox, Group, NumberInput, Select, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { CurrencyEuro } from "tabler-icons-react";
+import { CurrencyRupee } from "tabler-icons-react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setSingleUser } from "../../Redux/userSlice";
@@ -63,14 +63,15 @@ const EditBudget = (budgetDetails: BudgetDataProps) => {
         />
         <NumberInput
           required
-          icon={<CurrencyEuro size={16} />}
+          icon={<CurrencyRupee size={16} />}
           label="Amount"
           {...form.getInputProps("budget")}
         />
-        <TextInput
+        <Select
           required
           label="Category"
           placeholder={budgetDetails.tag}
+          data={["Food", "Transport", "Shopping", "Entertainment", "Bills", "Other"]}
           {...form.getInputProps("tag")}
         />
         <TextInput

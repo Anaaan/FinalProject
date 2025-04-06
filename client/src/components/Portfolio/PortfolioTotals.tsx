@@ -7,7 +7,7 @@ import PortfolioFunctions from "../../stats/portfolio";
 
 function PortfolioTotals() {
   const totalPortfolioTargetValue = useSelector(
-    (state: RootState) => state.user.goals.totalValueGoal
+    (state: RootState) => state.user.goals.totalValueTarget
   );
   const { totalPortfolioValue } = PortfolioFunctions();
   const data = [

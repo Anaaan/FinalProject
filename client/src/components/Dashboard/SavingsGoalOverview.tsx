@@ -34,7 +34,7 @@ export function SavingsGoalOverview() {
         {budgetData[0]?.title || "No Title"}
       </Text>
       <Text color="dimmed" align="center" size="sm">
-        Budget: {budgetData[0]?.budget || 0} INR
+        Budget: {budgetData[0]?.budget || 0} EUR
       </Text>
       <Group position="apart" mt="xs">
         <Text size="sm" color="dimmed">
@@ -61,7 +61,7 @@ export function SavingsGoalOverview() {
       />
       <Group position="apart" mt="md">
         <Text size="sm">
-          Spent: {expenseData.length && categoryExpense.length ? Number(categoryExpense[0][1]) : 0} INR
+          Spent: {expenseData.length && categoryExpense.length ? Number(categoryExpense[0][1]) : 0} EUR
         </Text>
         <Badge size="sm">{budgetData[0]?.tag || "No Tag"}</Badge>
       </Group>

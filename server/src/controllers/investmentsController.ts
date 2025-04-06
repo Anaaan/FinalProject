@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from 'express'
 
-import Investment from '../../models/Investment';
-import investmentService from '../../services/investmentServices';
-import { BadRequestError } from '../../helpers/apiError';
-import userServices from '../../services/userServices';
+import Investment from '../models/Investment'
+import investmentService from '../services/investmentServices'
+import { BadRequestError } from '../helpers/apiError'
+import userServices from '../services/userServices'
 
 // POST /investments
 export const addInvestment = async (

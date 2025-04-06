@@ -115,7 +115,10 @@ export const updateUser = async (
   next: NextFunction
 ) => {
   try {
-    const updatedUser = await UserService.updateUser(req.params.userId, req.body)
+    const updatedUser = await UserService.updateUser(
+      req.params.userId,
+      req.body
+    )
     res.json(updatedUser)
   } catch (error) {
     next(error)

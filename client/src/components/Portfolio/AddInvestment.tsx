@@ -28,7 +28,7 @@ function AddInvestment() {
 
   const form = useForm({
     initialValues: {
-      name: "",
+      name: "Random Investment",
       category: "Uncategorized",
       //transactionType: "Buy",
       amount: 0,
@@ -36,7 +36,7 @@ function AddInvestment() {
       totalValue: 0,
       date: formList([{ dateBought: new Date(), dateSold: new Date() }]),
       price: formList([{ priceBought: 0, priceSold: 0 }]),
-      currency: "INR",
+      currency: "EUR",
       fee: 0,
       comments: "",
     },

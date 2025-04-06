@@ -1,4 +1,3 @@
-
 import {
   TextInput,
   Textarea,
@@ -25,13 +24,16 @@ function AddBudget() {
   const form = useForm({
     initialValues: {
       title: "",
-      budget: 0,
+      budget: undefined as number | undefined,
       tag: "",
       comments: "",
     },
     validate: (values) => ({
       title: values.title.trim() === "" ? "Name is required" : null,
-      amount: values.budget <= 0 ? "Budget must be greater than 0" : null,
+      budget:
+        typeof values.budget !== "number" || values.budget <= 0
+          ? "Budget must be greater than 0"
+          : null,
     }),
   });
 
@@ -41,12 +43,15 @@ function AddBudget() {
         onSubmit={form.onSubmit(async (values) => {
           try {
             const res = await axios.post(`${SERVER_URL}/budget/${userId}`, {
-              ...values,
-              budget: Number(values.budget), // Convert to number before sending
+              title: values.title,
+              amount: values.budget, // ✅ map budget → amount
+              tag: values.tag,
+              comments: values.comments,
             });
+
             console.log(res.data);
             form.reset();
-            
+
             const userRes = await fetch(`${SERVER_URL}/users/${userId}`, {
               method: "GET",
               headers: { Authorization: `Bearer ${token}` },
@@ -72,19 +77,33 @@ function AddBudget() {
           required
           icon={<CurrencyRupee size={16} />}
           label="Amount"
-          value={form.values.budget} // Explicitly bind the value
-          onChange={(value) => form.setFieldValue("budget", Number(value) || 0)} // Convert to Number
-          min={1} // Prevent negative values
+          placeholder="Enter amount"
+          value={form.values.budget}
+          onChange={(value) => {
+            if (typeof value === "number") {
+              form.setFieldValue("budget", value);
+            } else {
+              form.setFieldValue("budget", undefined); // 🔥 Type-safe
+            }
+          }}
+          min={1}
           hideControls
         />
 
         <Select
-        required
           label="Category"
           placeholder="Select a category"
-          data={["Food", "Transport", "Shopping", "Entertainment", "Bills", "Other"]}
+          data={[
+            "Food",
+            "Transport",
+            "Shopping",
+            "Entertainment",
+            "Bills",
+            "Other",
+          ]}
           {...form.getInputProps("tag")}
         />
+
         <Textarea
           label="Comments"
           placeholder="Add additional comments"

@@ -11,6 +11,7 @@ export const category = [
 
 export const currency = [
   "--Currency--",
+  "INR",
   "EUR",
   "USD",
   "GBP",

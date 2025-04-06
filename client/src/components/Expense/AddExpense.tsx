@@ -133,7 +133,7 @@ function AddExpense() {
       name: "Random expense",
       amount: 0,
       date: new Date(),
-      tag: "Uncategorized",
+      tag: "",
       comments: "",
     },
 
@@ -141,6 +141,7 @@ function AddExpense() {
       name: values.name === undefined ? "Name is required" : null,
       amount: values.amount === undefined ? "Amount is required" : null,
       date: values.date === undefined ? "Date is required" : null,
+      tag: values.tag === "" ? "Category is required" : null,
     }),
   });
 
@@ -192,12 +193,13 @@ function AddExpense() {
           label="Date"
           {...form.getInputProps("date")}
         />
-        <Select
-          label="Category"
-          placeholder="Select a category"
-          data={["Food", "Transport", "Shopping", "Entertainment", "Bills", "Other"]}
-          {...form.getInputProps("tag")}
-        />
+     <Select
+         required
+        label="Category"
+        placeholder="Select a category"
+         data={["Food", "Transport", "Shopping", "Entertainment", "Bills", "Other"]}
+         {...form.getInputProps("tag")}
+      />
         <Textarea
           label="Comments"
           placeholder="Add additional comments"

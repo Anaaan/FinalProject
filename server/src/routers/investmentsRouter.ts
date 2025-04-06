@@ -1,4 +1,4 @@
-import { Router } from 'express'
+import { Router } from 'express';
 
 import {
   addInvestment,
@@ -6,14 +6,14 @@ import {
   findInvestments,
   getInvestmentById,
   updateInvestment,
-} from '../controllers/investmentsController'
+} from '../helpers/controllers/investmentsController';
 
-const router = Router()
+const router = Router();
 
-router.get('/', findInvestments)
-router.post('/:userId', addInvestment)
-router.get('/:investmentId', getInvestmentById)
-router.delete('/:investmentId', deleteInvestment)
-router.put('/:investmentId', updateInvestment)
+router.get('/', findInvestments);
+router.post('/:userId', addInvestment); // Fixed missing parenthesis
+router.get('/:investmentId', getInvestmentById);
+router.delete('/:investmentId', deleteInvestment);
+router.put('/:investmentId', updateInvestment);
 
-export default router
+export default router;

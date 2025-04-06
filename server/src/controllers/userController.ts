@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import { JWT_SECRET } from '../util/seccret'
-import User from '../models/User'
-import UserService from '../services/userServices'
-import { BadRequestError, NotFoundError } from '../helpers/apiError'
+import { JWT_SECRET } from '../../util/seccret'
+import User from '../../models/User'
+import UserService from '../../services/userServices'
+import { BadRequestError, NotFoundError } from '../apiError'
 
 // POST /users
 export const createUser = async (

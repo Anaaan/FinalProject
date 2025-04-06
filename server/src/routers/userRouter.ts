@@ -12,7 +12,8 @@ import {
   addIncomeToUser,
   addExpenseToUser,
   addImageToUser,
-} from '../controllers/userController'
+} from '../helpers/controllers/userController'
+
 
 const router = Router()
 
